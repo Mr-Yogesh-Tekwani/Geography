@@ -17,21 +17,6 @@ class ViewController: UIViewController {
         return stack
     }()
     
-    let hstack : UIStackView = {
-       let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.distribution = .fill
-        stack.alignment = .fill
-        return stack
-    }()
-    
-    let button : UIButton = {
-        let b1 = UIButton()
-        b1.backgroundColor = .systemBlue
-        b1.tintColor = .white
-        return b1
-    }()
-    
     let buttonTV : UIButton = {
         let b1 = UIButton()
         b1.backgroundColor = .systemBlue
@@ -50,14 +35,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        button.setTitle("Goto SecondVC", for: .normal)
+        
         buttonTV.setTitle("Goto ThirdVC", for: .normal)
         
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        
         buttonTV.addTarget(self, action: #selector(gotoThird), for: .touchUpInside)
-        
-        
-        mainstack.addArrangedSubview(button)
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
+
         mainstack.addArrangedSubview(buttonTV)
         mainstack.addArrangedSubview(tableView)
         
@@ -79,15 +63,34 @@ class ViewController: UIViewController {
 
     @objc func buttonPressed(){
         let secondVC = SecondViewController()
-        secondVC.modalPresentationStyle = .automatic
-        self.present(secondVC, animated: true)
+//        secondVC.modalPresentationStyle = .automatic
+//        self.present(secondVC, animated: true)
+        navigationController?.pushViewController(secondVC, animated: true)
     }
     
     @objc func gotoThird(){
         let secondVC = ThirdViewController()
-        secondVC.modalPresentationStyle = .fullScreen
-        self.present(secondVC, animated: true)
+//        secondVC.modalPresentationStyle = .fullScreen
+//        self.present(secondVC, animated: true)
+        navigationController?.pushViewController(secondVC, animated: true)
     }
+    
+}
+
+
+extension ViewController : UITableViewDelegate{}
+
+extension ViewController : UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell") as? CustomTableViewCell else { return UITableViewCell() }
+        cell.button.setTitle("Test", for: .normal)
+        return cell
+    }
+    
     
 }
 

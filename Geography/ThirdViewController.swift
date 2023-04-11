@@ -17,22 +17,6 @@ class ThirdViewController: UIViewController {
         return stack
     }()
     
-    let hstack : UIStackView = {
-       let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.distribution = .fill
-        stack.alignment = .fill
-        return stack
-    }()
-    
-    let button : UIButton = {
-        let b1 = UIButton()
-        b1.setTitle("Back to MainVC", for: .normal)
-        b1.backgroundColor = .systemBlue
-        b1.tintColor = .white
-        return b1
-    }()
-    
     let tableView : UITableView = {
         
         let table =  UITableView()
@@ -53,8 +37,7 @@ class ThirdViewController: UIViewController {
 //            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
 //            button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
 //        ])
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        mainstack.addArrangedSubview(button)
+        
         mainstack.addArrangedSubview(tableView)
         
         self.view.addSubview(mainstack)
@@ -72,12 +55,6 @@ class ThirdViewController: UIViewController {
         
     }
 
-
-    @objc func buttonPressed(){
-        let secondVC = ViewController()
-        secondVC.modalPresentationStyle = .fullScreen
-        self.present(secondVC, animated: true)
-    }
     
 }
 
