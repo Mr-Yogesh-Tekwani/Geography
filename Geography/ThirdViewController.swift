@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ThirdViewController.swift
 //  Geography
 //
 //  Created by Yogesh Tekwani on 4/10/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ThirdViewController: UIViewController {
 
     let mainstack : UIStackView = {
         let stack = UIStackView()
@@ -27,13 +27,7 @@ class ViewController: UIViewController {
     
     let button : UIButton = {
         let b1 = UIButton()
-        b1.backgroundColor = .systemBlue
-        b1.tintColor = .white
-        return b1
-    }()
-    
-    let buttonTV : UIButton = {
-        let b1 = UIButton()
+        b1.setTitle("Back to MainVC", for: .normal)
         b1.backgroundColor = .systemBlue
         b1.tintColor = .white
         return b1
@@ -46,19 +40,21 @@ class ViewController: UIViewController {
         return table
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        button.setTitle("Goto SecondVC", for: .normal)
-        buttonTV.setTitle("Goto ThirdVC", for: .normal)
         
+//        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+//
+//        self.view.addSubview(button)
+//
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//
+//        NSLayoutConstraint.activate([
+//            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+//            button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+//        ])
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        buttonTV.addTarget(self, action: #selector(gotoThird), for: .touchUpInside)
-        
-        
         mainstack.addArrangedSubview(button)
-        mainstack.addArrangedSubview(buttonTV)
         mainstack.addArrangedSubview(tableView)
         
         self.view.addSubview(mainstack)
@@ -78,13 +74,7 @@ class ViewController: UIViewController {
 
 
     @objc func buttonPressed(){
-        let secondVC = SecondViewController()
-        secondVC.modalPresentationStyle = .automatic
-        self.present(secondVC, animated: true)
-    }
-    
-    @objc func gotoThird(){
-        let secondVC = ThirdViewController()
+        let secondVC = ViewController()
         secondVC.modalPresentationStyle = .fullScreen
         self.present(secondVC, animated: true)
     }
